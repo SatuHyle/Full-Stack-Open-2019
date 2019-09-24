@@ -2,35 +2,34 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 
-const Header = (props) => {
+const Header = (props) => { //div ei tarvita, koska yksi rivi html:aa
     return (
-      <div>
-        <h1>{props.course.name}</h1>
-      </div>
+      <h1>{props.course.name}</h1>
     )
   }
 
-const Part = (props) => {
+const Part = (props) => { //div tarvitaan jos html:aa on enemman kuin yksi rivi
     return (
-      <p>{props.part + " " + props.exercises}</p>
-      )
+      <div>
+        <h2>{props.part}</h2>
+        <p>Number of exercises: {props.exercises}</p> 
+      </div>
+      ) 
   }
 
   const Content = (props) => {
-      return (
-        <>
-          {props.parts.map(part => (
-          <Part part={part.name} exercises={part.exercises} />
-          ))}
-        </>
+    return (
+      <div>
+      {props.parts.map(part => (
+      <Part part={part.name} exercises={part.exercises} />
+      ))}
+      </div>
     )
 }
 
 const Total = (props) => {
     return (
-      <div>
-        <h2>Total number of exercises {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}</h2>
-      </div>
+        <h2>Total number of exercises {props.all_parts[0].exercises + props.all_parts[1].exercises + props.all_parts[2].exercises}</h2>
     )
   }
 
@@ -57,7 +56,7 @@ const Total = (props) => {
       <div>
         <Header course={course} />
         <Content parts={course.parts} /> 
-        <Total parts={course.parts} />
+        <Total all_parts={course.parts} />
       </div>
     )
   }
